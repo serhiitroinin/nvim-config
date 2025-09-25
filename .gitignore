@@ -1,0 +1,36 @@
+# Neovim generated files
+.netrwhist
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Plugin directories (managed by lazy.nvim)
+lazy-lock.json.tmp
+
+# Session files
+Session.vim
+*.vim.session
+
+# Undo files
+undodir/
+undo/
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+.temp/
+
+# Local configuration overrides
+local.lua
+.local/
+
+# IDE files
+.idea/
+.vscode/
+
+# OS files
+Thumbs.db
+Desktop.ini

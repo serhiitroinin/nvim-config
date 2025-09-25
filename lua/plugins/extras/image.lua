@@ -1,0 +1,82 @@
+return {
+  -- Temporarily disabled due to tmux detection issues
+  -- Uncomment below to re-enable image.nvim plugin
+  -- {
+  --   "3rd/image.nvim",
+  --   event = "VeryLazy",
+  --   build = ":UpdateRemotePlugins",
+  --   config = function()
+  --     -- Bypass tmux detection
+  --     vim.g.image_nvim_tmux_passthrough = false
+  --     vim.env.TMUX = nil
+  --
+  --     local ok, image = pcall(require, "image")
+  --     if ok then
+  --       image.setup({
+  --         backend = "kitty",
+  --         processor = "magick_cli",
+  --         kitty_method = "normal",
+  --         kitty_tmux_write_delay = 0,
+  --         integrations = {
+  --           markdown = {
+  --             enabled = true,
+  --             clear_in_insert_mode = false,
+  --             download_remote_images = true,
+  --             only_render_image_at_cursor = false,
+  --             filetypes = { "markdown", "vimwiki" },
+  --           },
+  --           neorg = {
+  --             enabled = true,
+  --             clear_in_insert_mode = false,
+  --             download_remote_images = true,
+  --             only_render_image_at_cursor = false,
+  --             filetypes = { "norg" },
+  --           },
+  --           typst = {
+  --             enabled = true,
+  --             clear_in_insert_mode = false,
+  --             download_remote_images = true,
+  --             only_render_image_at_cursor = false,
+  --             filetypes = { "typst" },
+  --           },
+  --           html = {
+  --             enabled = false,
+  --           },
+  --           css = {
+  --             enabled = false,
+  --           },
+  --         },
+  --         max_width = nil,
+  --         max_height = nil,
+  --         max_width_window_percentage = nil,
+  --         max_height_window_percentage = 50,
+  --         window_overlap_clear_enabled = false,
+  --         window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
+  --         editor_only_render_when_focused = false,
+  --         tmux_show_only_in_active_window = false,
+  --         hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.avif" },
+  --       })
+  --     end
+  --   end,
+  --   dependencies = {
+  --     {
+  --       "nvim-treesitter/nvim-treesitter",
+  --       build = ":TSUpdate",
+  --       config = function()
+  --         require("nvim-treesitter.configs").setup({
+  --           ensure_installed = { "markdown" },
+  --           highlight = { enable = true },
+  --         })
+  --       end,
+  --     },
+  --     {
+  --       "vhyrro/luarocks.nvim",
+  --       priority = 1000,
+  --       config = true,
+  --       opts = {
+  --         rocks = { "magick" },
+  --       },
+  --     },
+  --   },
+  -- },
+}
