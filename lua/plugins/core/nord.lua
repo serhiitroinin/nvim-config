@@ -15,6 +15,35 @@ return {
 
 			-- Load the colorscheme
 			require("nord").set()
+
+			-- Fix visibility of ignored/hidden files in file explorers
+			vim.api.nvim_create_autocmd("ColorScheme", {
+				pattern = "nord",
+				callback = function()
+					-- Make ignored/hidden files more visible (use a brighter gray)
+					vim.api.nvim_set_hl(0, "NvimTreeGitIgnored", { fg = "#616E88", italic = true })
+					vim.api.nvim_set_hl(0, "NvimTreeSpecialFile", { fg = "#88C0D0", underline = true })
+					vim.api.nvim_set_hl(0, "NeoTreeDimText", { fg = "#616E88" })
+					vim.api.nvim_set_hl(0, "NeoTreeGitIgnored", { fg = "#616E88", italic = true })
+					vim.api.nvim_set_hl(0, "NeoTreeHiddenByName", { fg = "#616E88", italic = true })
+					vim.api.nvim_set_hl(0, "Comment", { fg = "#616E88", italic = true })
+
+					-- Snacks explorer (oil.nvim style)
+					vim.api.nvim_set_hl(0, "OilDimText", { fg = "#616E88" })
+					vim.api.nvim_set_hl(0, "SnacksExplorerDim", { fg = "#616E88" })
+					vim.api.nvim_set_hl(0, "SnacksExplorerHidden", { fg = "#616E88", italic = true })
+					vim.api.nvim_set_hl(0, "SnacksExplorerSpecial", { fg = "#88C0D0" })
+
+					-- General directory and special file colors
+					vim.api.nvim_set_hl(0, "Directory", { fg = "#88C0D0" })
+					vim.api.nvim_set_hl(0, "NonText", { fg = "#4C566A" })
+					vim.api.nvim_set_hl(0, "Whitespace", { fg = "#3B4252" })
+					vim.api.nvim_set_hl(0, "SpecialKey", { fg = "#4C566A" })
+				end
+			})
+
+			-- Apply the highlights immediately
+			vim.cmd("doautocmd ColorScheme nord")
 		end,
 	},
 
