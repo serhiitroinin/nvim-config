@@ -20,22 +20,51 @@ return {
 			vim.api.nvim_create_autocmd("ColorScheme", {
 				pattern = "nord",
 				callback = function()
-					-- Make ignored/hidden files more visible (use a brighter gray)
-					vim.api.nvim_set_hl(0, "NvimTreeGitIgnored", { fg = "#616E88", italic = true })
-					vim.api.nvim_set_hl(0, "NvimTreeSpecialFile", { fg = "#88C0D0", underline = true })
-					vim.api.nvim_set_hl(0, "NeoTreeDimText", { fg = "#616E88" })
-					vim.api.nvim_set_hl(0, "NeoTreeGitIgnored", { fg = "#616E88", italic = true })
-					vim.api.nvim_set_hl(0, "NeoTreeHiddenByName", { fg = "#616E88", italic = true })
-					vim.api.nvim_set_hl(0, "Comment", { fg = "#616E88", italic = true })
+					-- Determine colors based on background (light/dark mode)
+					local is_light = vim.o.background == "light"
 
-					-- Snacks explorer (oil.nvim style)
-					vim.api.nvim_set_hl(0, "OilDimText", { fg = "#616E88" })
-					vim.api.nvim_set_hl(0, "SnacksExplorerDim", { fg = "#616E88" })
-					vim.api.nvim_set_hl(0, "SnacksExplorerHidden", { fg = "#616E88", italic = true })
-					vim.api.nvim_set_hl(0, "SnacksExplorerSpecial", { fg = "#88C0D0" })
+					local dim_color, very_dim_color, hidden_color, dir_color
+
+					if is_light then
+						-- Light theme colors (darker for visibility on light background)
+						hidden_color = "#6C7A89"   -- Dark gray for hidden files on light bg
+						dim_color = "#7B8799"      -- Slightly darker
+						very_dim_color = "#8A95A7" -- For comments
+						dir_color = "#5E81AC"      -- Darker blue for directories
+					else
+						-- Dark theme colors (brighter for visibility on dark background)
+						hidden_color = "#9099AB"   -- Bright gray for hidden files on dark bg
+						dim_color = "#8A95A7"      -- Clearly visible but still "dimmed"
+						very_dim_color = "#7B88A1" -- For comments and less important items
+						dir_color = "#88C0D0"      -- Nord cyan for directories
+					end
+
+					-- Make ignored/hidden files more visible
+					vim.api.nvim_set_hl(0, "NvimTreeGitIgnored", { fg = hidden_color, italic = true })
+					vim.api.nvim_set_hl(0, "NvimTreeSpecialFile", { fg = dir_color, underline = true })
+					vim.api.nvim_set_hl(0, "NeoTreeDimText", { fg = hidden_color })
+					vim.api.nvim_set_hl(0, "NeoTreeGitIgnored", { fg = hidden_color, italic = true })
+					vim.api.nvim_set_hl(0, "NeoTreeHiddenByName", { fg = hidden_color, italic = true })
+					vim.api.nvim_set_hl(0, "Comment", { fg = very_dim_color, italic = true })
+
+					-- Snacks explorer - comprehensive coverage
+					vim.api.nvim_set_hl(0, "OilDimText", { fg = hidden_color })
+					vim.api.nvim_set_hl(0, "SnacksExplorerDim", { fg = hidden_color })
+					vim.api.nvim_set_hl(0, "SnacksExplorerHidden", { fg = hidden_color, italic = true })
+					vim.api.nvim_set_hl(0, "SnacksExplorerSpecial", { fg = dir_color })
+					vim.api.nvim_set_hl(0, "SnacksExplorerIgnored", { fg = hidden_color, italic = true })
+					vim.api.nvim_set_hl(0, "SnacksExplorerDotfile", { fg = hidden_color, italic = true })
+
+					-- Git-specific items
+					vim.api.nvim_set_hl(0, "SnacksExplorerGitIgnore", { fg = hidden_color, italic = true })
+					vim.api.nvim_set_hl(0, "SnacksExplorerGitIgnored", { fg = hidden_color, italic = true })
+
+					-- Fallback for any "ignored" or "dim" patterns
+					vim.api.nvim_set_hl(0, "Ignored", { fg = hidden_color, italic = true })
+					vim.api.nvim_set_hl(0, "GitIgnored", { fg = hidden_color, italic = true })
 
 					-- General directory and special file colors
-					vim.api.nvim_set_hl(0, "Directory", { fg = "#88C0D0" })
+					vim.api.nvim_set_hl(0, "Directory", { fg = dir_color })
 					vim.api.nvim_set_hl(0, "NonText", { fg = "#4C566A" })
 					vim.api.nvim_set_hl(0, "Whitespace", { fg = "#3B4252" })
 					vim.api.nvim_set_hl(0, "SpecialKey", { fg = "#4C566A" })
@@ -60,7 +89,10 @@ return {
 				set_dark_mode = function()
 					vim.o.background = "dark"
 					vim.cmd("colorscheme nord")
-					
+
+					-- Trigger ColorScheme autocmd to apply our custom highlights
+					vim.cmd("doautocmd ColorScheme nord")
+
 					-- Force lualine refresh
 					local ok_lualine, lualine = pcall(require, "lualine")
 					if ok_lualine then
@@ -71,7 +103,10 @@ return {
 					-- Nord doesn't have a built-in light variant, but we can use a light theme that complements it
 					vim.o.background = "light"
 					vim.cmd("colorscheme nord")
-					
+
+					-- Trigger ColorScheme autocmd to apply our custom highlights for light mode
+					vim.cmd("doautocmd ColorScheme nord")
+
 					-- Force lualine refresh
 					local ok_lualine, lualine = pcall(require, "lualine")
 					if ok_lualine then
