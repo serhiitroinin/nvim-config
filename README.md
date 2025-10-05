@@ -1,4 +1,4 @@
-# Neovim Configuration
+#/var/folders/pf/wkqbpqy56g7djnl5_wjsfs0h0000gn/T/TemporaryItems/NSIRD_screencaptureui_rbggMQ/Screenshot\ 2025-10-01\ at\ 23.47.38.png Neovim Configuration
 
 A modern, feature-rich Neovim configuration focused on productivity and developer experience.
 
@@ -40,16 +40,19 @@ The dashboard features a two-pane layout with system info, recent files, project
 ### Installation
 
 1. **Backup existing configuration** (if any):
+
 ```bash
 mv ~/.config/nvim ~/.config/nvim.bak
 ```
 
 2. **Clone this repository**:
+
 ```bash
 git clone https://github.com/serhiitroinin/nvim-config.git ~/.config/nvim
 ```
 
 3. **Launch Neovim**:
+
 ```bash
 nvim
 ```
@@ -62,19 +65,19 @@ The leader key is `<Space>`.
 
 ### Most Used
 
-| Key | Description |
-|-----|------------|
-| `<leader>ff` | Find files |
+| Key          | Description             |
+| ------------ | ----------------------- |
+| `<leader>ff` | Find files              |
 | `<leader>fg` | Live grep (search text) |
-| `<leader>fb` | Find buffers |
-| `<leader>fe` | File explorer |
-| `<leader>ca` | Code actions |
-| `<leader>cr` | Rename symbol |
-| `gd` | Go to definition |
-| `gr` | Go to references |
-| `K` | Hover documentation |
-| `<leader>gg` | Git status |
-| `<leader>;` | Dashboard |
+| `<leader>fb` | Find buffers            |
+| `<leader>fe` | File explorer           |
+| `<leader>ca` | Code actions            |
+| `<leader>cr` | Rename symbol           |
+| `gd`         | Go to definition        |
+| `gr`         | Go to references        |
+| `K`          | Hover documentation     |
+| `<leader>gg` | Git status              |
+| `<leader>;`  | Dashboard               |
 
 See [full keymaps documentation](docs/keymaps.md) for complete list.
 
@@ -155,21 +158,25 @@ return {
 ## Troubleshooting
 
 ### Health Check
+
 ```vim
 :checkhealth
 ```
 
 ### Update Plugins
+
 ```vim
 :Lazy update
 ```
 
 ### View Plugin Status
+
 ```vim
 :Lazy
 ```
 
 ### LSP Information
+
 ```vim
 :LspInfo
 :Mason

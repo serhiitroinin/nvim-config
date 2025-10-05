@@ -158,3 +158,34 @@ vim.diagnostic.config({
 
 -- Diagnostic navigation is handled in lsp-config.lua
 -- Using <leader>dn and <leader>dp for consistency
+
+-- Enable soft wrap for markdown files
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "markdown", "md" },
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true
+    vim.opt_local.breakindent = true
+  end,
+})
+
+-- Auto-reload files when changed externally
+vim.opt.autoread = true
+
+-- Trigger checktime when files change on disk
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
+  pattern = "*",
+  callback = function()
+    if vim.fn.mode() ~= "c" then
+      vim.cmd("checktime")
+    end
+  end,
+})
+
+-- Notification when file changes externally
+vim.api.nvim_create_autocmd("FileChangedShellPost", {
+  pattern = "*",
+  callback = function()
+    vim.notify("File changed on disk. Buffer reloaded.", vim.log.levels.WARN)
+  end,
+})

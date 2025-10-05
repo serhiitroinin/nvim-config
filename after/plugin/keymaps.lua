@@ -184,6 +184,11 @@ if neotest_ok then
 end
 
 -- =============================================
+-- WRITING MODE KEYMAPS
+-- =============================================
+map("n", "<leader>zz", "<cmd>Goyo<cr>", { desc = "Toggle Zen Writing Mode (Goyo)" })
+
+-- =============================================
 -- ADDITIONAL WHICH-KEY REGISTRATIONS
 -- =============================================
 wk.add({

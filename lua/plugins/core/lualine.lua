@@ -7,9 +7,9 @@ return {
 		local icons = require("icons")
 
 		lualine.setup({
-			options = {
-				icons_enabled = true,
-				theme = "nord", -- Use nord theme
+    options = {
+      icons_enabled = true,
+      theme = "everforest", -- Use everforest theme
 				component_separators = { left = "", right = "" },
 				section_separators = { left = "", right = "" },
 				disabled_filetypes = {

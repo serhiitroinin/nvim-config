@@ -114,6 +114,28 @@ return {
       notifier = {
         enabled = false,  -- Disabled - using nvim-notify instead for better compatibility
       },
+      dim = {
+        enabled = true,
+        scope = {
+          min_size = 2,
+          max_size = nil,  -- No maximum limit
+          siblings = true,
+          treesitter = {
+            enabled = true,
+            -- Prioritize method-level scopes in classes
+            priority = {
+              "method_definition",
+              "function_declaration",
+              "arrow_function",
+              "function",
+              "class_body",
+            },
+          },
+        },
+        animate = {
+          enabled = vim.fn.has("nvim-0.10") == 1,
+        },
+      },
       terminal = {
         win = {
           style = "minimal",
@@ -128,6 +150,7 @@ return {
       local picker = snacks.picker
       local terminal = snacks.terminal
       local dashboard = snacks.dashboard
+      local dim = snacks.dim
 
       -- Notification handling is done by nvim-notify (see plugins/core/notify.lua)
       -- This provides better compatibility with all plugins
@@ -218,6 +241,20 @@ return {
         vim.keymap.set("n", "<leader>Tp", function()
           terminal.run({ cmd = { "python3" }, layout = "float" })
         end, { desc = "Python REPL" })
+      end
+
+      if dim then
+        vim.keymap.set("n", "<leader>ud", function()
+          if dim.enabled then
+            dim.disable()
+          else
+            dim.enable()
+          end
+        end, { desc = "Toggle Dim" })
+
+        vim.keymap.set("n", "<leader>uD", function()
+          dim.enable()
+        end, { desc = "Enable Dim" })
       end
     end,
   },

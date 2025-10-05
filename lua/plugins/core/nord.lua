@@ -2,6 +2,7 @@ return {
 	-- Nord colorscheme
 	{
 		"shaunsingh/nord.nvim",
+		enabled = false,
 		lazy = false,
 		priority = 1000,
 		config = function()
@@ -79,6 +80,7 @@ return {
 	-- Auto dark/light mode switching
 	{
 		"f-person/auto-dark-mode.nvim",
+		enabled = false,
 		lazy = false,
 		priority = 999,
 		config = function()
